@@ -1,0 +1,166 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+class Publisher{
+ public String message1;
+ public String message2;
+ public String message3;
+ public String message4;
+ 
+ Publisher(String m1,String m2,String m3,String m4){
+         this.message1=m1;
+         this.message2=m2;
+         this.message3=m3;
+         this.message4=m4;
+ }
+
+ public String publish1()
+ {
+   return message1;
+ }
+ public String publish2()
+ {
+   return message2;
+ }
+ public String publish3()
+ {
+   return message3;
+ }
+ public String publish4()
+ {
+   return message4;
+ }
+}
+class Dispatcher{
+ ArrayList<String> sub = new ArrayList<String>();
+ public void subscribe1(int s){
+     System.out.println("You subscribed ms1");
+     sub.add("ms1");
+ }
+ public void subscribe2(int s){
+     System.out.println("You subscribed ms2");
+     sub.add("ms2");
+     
+ }
+ public void subscribe3(int s){
+     System.out.println("You subscribed ms3");
+     sub.add("ms3");
+      
+ }
+ public void subscribe4(int s){
+     System.out.println("You subscribed ms4");
+     sub.add("ms4");
+      
+ }
+
+ public void  unsubscribe1(int s){
+     System.out.println("You unsubscribed ms1");
+     sub.remove("ms1");
+  
+ }
+ public void  unsubscribe2(int s){
+     System.out.println("You unsubscribed ms2");
+     sub.remove("ms2");  
+ }
+ public void unsubscribe3(int s){
+     System.out.println("You unsubscribed ms3");
+     sub.remove("ms3");    
+ }
+ public void unsubscribe4(int s){
+     System.out.println("You unsubscribed ms2");
+     sub.remove("ms4");
+ }
+}
+
+class Subscriber{
+  public Publisher pub;
+  public Dispatcher disp;
+  public Subscriber(Publisher pub,Dispatcher disp)
+  {
+    this.pub=pub;
+    this.disp=disp;
+  }
+  public void recieve()
+  {
+    if(disp.sub.contains("ms1"))
+    System.out.println("Recieved message: "+pub.publish1());
+    if(disp.sub.contains("ms2"))
+    System.out.println("Recieved message: "+pub.publish2());
+    if(disp.sub.contains("ms3"))
+    System.out.println("Recieved message: "+pub.publish3());
+    if(disp.sub.contains("ms4"))
+    System.out.println("Recieved message: "+pub.publish4());
+    else if(disp.sub.size()>4)
+      System.out.println("Other publishers also available");
+}
+}
+
+ public class Main{
+     public static void main(String[] args) {
+
+    Scanner sc;
+         sc = new Scanner(System.in);
+     int c=0;
+     int a=0;
+     int c1;
+     int c2;
+     String ms1;
+     String ms2;
+     String ms3;
+     String ms4;
+
+
+     System.out.println("Enter the today messages:");
+             ms1=sc.nextLine();
+             ms2=sc.nextLine();
+             ms3=sc.nextLine();
+             ms4=sc.nextLine();
+     Publisher obj1=new Publisher(ms1,ms2,ms3,ms4);
+     Dispatcher obj2=new Dispatcher();
+     Subscriber obj3=new Subscriber(obj1,obj2);
+     while(c<4){
+             System.out.println("Enter ur choice:");
+             System.out.println("1.subscibe\n2.unsubscribe\n3.recieve\n4.exit");
+             c=sc.nextInt();
+             switch(c){
+             case 1:     System.out.println("Your subscriptions:");
+                         System.out.println(obj2.sub);
+                         System.out.println("Enter ur choice:");
+                         System.out.println("1.subscibe ms1\n2.subscribe ms2\n3.subscribe ms3\n4.subscribe ms4");
+                         c1=sc.nextInt();
+                         switch(c1){
+                         case 1:obj2.subscribe1(c1);
+                                break;
+                         case 2:obj2.subscribe2(c1);
+                                break;
+                         case 3:obj2.subscribe3(c1);
+                                break;
+                         case 4:obj2.subscribe4(c1);
+                               break;
+                        }
+                 
+                        break;
+               case 2:   System.out.println("Your subscriptions:");
+                         System.out.println(obj2.sub); 
+                          System.out.println("Enter ur choice:");
+                          System.out.println("\n1.unsubscibe ms1\n2.unsubscribe ms2\n3.unsubscribe ms3\n4.nunsubscribe ms4");
+                          c2=sc.nextInt();
+                         switch(c2){
+                        case 1:obj2.unsubscribe1(c2);
+                             break;
+                        case 2:obj2.unsubscribe2(c2);
+                               break;
+                        case 3:obj2.unsubscribe3(c2);
+                               break;
+                        case 4:obj2.unsubscribe4(c2);
+                               break;
+                        }
+      
+                         break;      
+               case 3:    obj3.recieve();
+                         break;
+           }
+       }
+      
+     
+     }
+    }
